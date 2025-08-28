@@ -4,7 +4,6 @@ import torch
 
 app = Flask(__name__)
 
-# Load model (4-bit quantized to fit your GPU)
 model_id = "mistralai/Mistral-7B-Instruct-v0.2"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 
@@ -23,7 +22,6 @@ def generate():
         if not user_text:
             return jsonify({"error": "Missing 'text' field"}), 400
 
-        # Build a simple conversation
         messages = [
             {"role": "user", "content": user_text}
         ]
@@ -42,6 +40,5 @@ def generate():
 
 
 if __name__ == "__main__":
-    # Run on all interfaces so curl from your laptop works
     app.run(host="0.0.0.0", port=8001)
 
